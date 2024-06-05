@@ -1,0 +1,1 @@
+The project involves working with a database containing different types of information like employee details, product data, customer records, and payment information. The task is to use SQL queries to extract specific details from the database, such as finding employee names, product categories, order quantities, customer counts, and payment amounts
