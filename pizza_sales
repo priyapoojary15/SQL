@@ -1,0 +1,77 @@
+1. What is the total amount spent on pizzas in each order?
+   SELECT od.order_id, SUM(p.price  od.quantity) AS total_amount
+   FROM pizzas p
+   JOIN orders_details od ON p.pizza_id = od.pizza_id
+   GROUP BY od.order_id;
+   
+
+2. Which are the most recent orders, showing their IDs, dates, and times?
+   SELECT order_id, order_date, order_time
+   FROM orders
+   ORDER BY order_date DESC, order_time DESC
+   LIMIT 5;
+   
+
+3. What are the details (name, price, size, quantity) for orders containing 'The Big Meat Pizza' pizza type?
+   SELECT pt.name, p.price, p.size, od.quantity
+   FROM pizza_types pt
+   JOIN pizzas p ON pt.pizza_type_id = p.pizza_type_id
+   JOIN orders_details od ON p.pizza_id = od.pizza_id
+   WHERE pt.name = 'The Big Meat Pizza';
+   
+
+4. Which orders were placed between January 1st, 2015 and March 30th, 2015?
+   SELECT order_id, order_date
+   FROM orders
+   WHERE order_date BETWEEN '2015-01-01' AND '2015-03-30';
+   
+
+5. What are the details of orders that included pizzas with 'Pepperoni' in their name?
+   SELECT o.order_id, o.order_date, o.order_time
+   FROM orders o
+   JOIN orders_details od ON o.order_id = od.order_id
+   JOIN pizzas p ON od.pizza_id = p.pizza_id
+   JOIN pizza_types pt ON p.pizza_type_id = pt.pizza_type_id
+   WHERE pt.name LIKE '%Pepperoni%';
+   
+
+6. How many total orders were placed?
+   
+   SELECT COUNT(order_id) AS total_orders
+   FROM orders;
+   
+   
+7. What is the total revenue generated from pizza sales?
+   SELECT SUM(p.price  od.quantity) AS total_revenue
+   FROM pizzas p
+   JOIN orders_details od ON p.pizza_id = od.pizza_id;
+   
+
+8. Which pizza type is the highest-priced?
+   SELECT pt.name, p.price
+   FROM pizza_types pt
+   JOIN pizzas p ON pt.pizza_type_id = p.pizza_type_id
+   ORDER BY p.price DESC
+   LIMIT 1;
+   
+
+9. What is the most commonly ordered pizza size?
+   
+   SELECT p.size, COUNT(o.order_details_id) AS order_count
+   FROM pizzas p
+   JOIN orders_details o ON p.pizza_id = o.pizza_id
+   GROUP BY p.size
+   ORDER BY order_count DESC
+   LIMIT 1;
+   
+
+10. Which are the top 5 most ordered pizza types along with their total quantities?
+    SELECT pt.name, SUM(od.quantity) AS total_quantity
+    FROM pizza_types pt
+    JOIN pizzas p ON pt.pizza_type_id = p.pizza_type_id
+    JOIN orders_details od ON p.pizza_id = od.pizza_id
+    GROUP BY pt.name
+    ORDER BY total_quantity DESC
+    LIMIT 5;
+
+
