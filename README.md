@@ -1,1 +1,0 @@
-This repository contains SQL queries and scripts for a database project aimed at data analysis and management. The SQL scripts included here are designed to perform various tasks such as data extraction, manipulation, querying, and reporting within a database environment.
